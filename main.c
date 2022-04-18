@@ -1,6 +1,6 @@
 /* /////////////////////////////////////////////////////
 **** Software version: V1.1.0       ****
-**** Hardware number : RPB030_V1.1  ****
+**** Hardware number : P030_V1.1  ****
 **** Author          : shensida     ****
 **** Date            : 2017-03-29   ****
 /////////////////////////////////////////////////////// */
@@ -10,7 +10,7 @@
 
 uint8_t t1s_flag = 0;
 
-///////////////==== main∫Ø ˝ ====/////////////// 
+///////////////==== mainÂáΩÊï∞ ====/////////////// 
 int  main( void )
 {
 	all_init();
@@ -33,7 +33,7 @@ int  main( void )
 }
 
 
-/////////////// ◊‹≥ı ºªØ /////////////// 
+/////////////// ÊÄªÂàùÂßãÂåñ /////////////// 
 void all_init(void)
 {
 	SYS_Init();
@@ -70,12 +70,12 @@ void all_init(void)
 	WDT_CR_set();
 }
 
-/////////////// ø™ª˙–≈œ¢¥Æø⁄ ‰≥ˆ ///////////////
+/////////////// ÂºÄÊú∫‰ø°ÊÅØ‰∏≤Âè£ËæìÂá∫ ///////////////
 void printf_boot_info(void)
 {
 	WDT_CR_set();
 	printf("\r\n\r\n+===========================================================+\r\n");
-	printf("|    <<<       Wall-mounted New FAN (150m3)       >>>       |\r\n");
+	printf("|    <<<       Wall-mounted New FAN           >>>           |\r\n");
 	printf("+-----------------------------------------------------------+\r\n");
 	printf("|  Author : shensida                                        |\r\n");
 	printf("|  Date   : ");
@@ -85,13 +85,13 @@ void printf_boot_info(void)
 	WDT_CR_set();
 	printf("                          |\r\n");
 	printf("|  Version: V1.1.0                                          |\r\n");
-	printf("|  Board  : RPB030_V1.1                                     |\r\n");
+	printf("|  Board  : P030_V1.1                                     |\r\n");
 	printf("+-----------------------------------------------------------+\n\r\n");
 	WDT_CR_set();
 }
 
-/////////////// Timer1÷–∂œ œµÕ≥”√ ///////////////
-//10mS÷–∂œ1¥Œ
+/////////////// Timer1‰∏≠Êñ≠ Á≥ªÁªüÁî® ///////////////
+//10mS‰∏≠Êñ≠1Ê¨°
 void TMR1_IRQHandler(void)
 {
 	if(TIMER_GetIntFlag(TIMER1) == 1)
