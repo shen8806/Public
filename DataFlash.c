@@ -2,29 +2,29 @@
 #include <stdio.h>
 
 uint32_t 		M0_uid[3] 			= {0};
-const uint32_t 	str_ssd_num[2]		= {0x4B445353,0x314A435A};	//SSDKZCJ1
+const uint32_t 	str_ssd_num[2]		= {0x4B123456,0x31123456};
 uint8_t 		device_id_str[RF_ADDR_LEN]	= {DEVICE_ID_SDAT};
 
-/////////////// ¶ÁÊı¾İ /////////////// 
+/////////////// è¯»æ•°æ® /////////////// 
 uint32_t u32FMC_Read(uint16_t addr)
 {
 	return FMC_Read( DF_REF_ADDR + addr );
 }
 
-/////////////// Ğ´Êı¾İ /////////////// 
+/////////////// å†™æ•°æ® /////////////// 
 void u32FMC_Write(uint16_t addr, uint32_t u32_sdat)
 {
 	FMC_Write( DF_REF_ADDR + addr, u32_sdat );
 }
 
-/////////////// ²Á³ıÊı¾İ /////////////// 
+/////////////// æ“¦é™¤æ•°æ® /////////////// 
 void u32FMC_Erase(uint16_t addr)
 {
 	FMC_Erase( DF_REF_ADDR + addr );
 }
 
 
-/////////////// ¶ÁÈ¡MCUµÄÎ¨Ò»IDºÅ /////////////// 
+/////////////// è¯»å–MCUçš„å”¯ä¸€IDå· /////////////// 
 void read_uid(void)
 {
 	uint32_t pllclk;
@@ -45,7 +45,7 @@ void read_uid(void)
 	printf("#### MCU CLK: %d.%dMHz\n",pllclk/1000000,pllclk%1000000);
 }
 
-/////////////// »ñÈ¡Éè±¸ID /////////////// 
+/////////////// è·å–è®¾å¤‡ID /////////////// 
 void device_id_get(void)
 {
 	uint32_t 	u32_tmp[2];
@@ -62,9 +62,9 @@ void device_id_get(void)
 	u32_tmp[0] = DataFlash_byte_read(DEVICE_ID_ADDR0);
 
 	printf("#### Device ID: ");
-	if((u32_tmp[0]>>24)!=device_id_str[0] || ((u32_tmp[0]>>16)&0xFF)!=device_id_str[1])		//Î´ÅäÖÃIDÇ°
+	if((u32_tmp[0]>>24)!=device_id_str[0] || ((u32_tmp[0]>>16)&0xFF)!=device_id_str[1])		//æœªé…ç½®IDå‰
 	{
-		u32_tmp[0] = M0_uid[0]^M0_uid[1]^M0_uid[2];	//Òì»ò
+		u32_tmp[0] = M0_uid[0]^M0_uid[1]^M0_uid[2];	//å¼‚æˆ–
 		
 		device_id_str[2] = (uint8_t)( ((u32_tmp[0]>>24)&0xFF) + ((u32_tmp[0]>>16)&0xFF) + ((u32_tmp[0]>>8)&0xFF) + (u32_tmp[0]&0xFF));
 		device_id_str[3] = M0_uid[1]&0xFF;
@@ -95,7 +95,7 @@ void device_id_get(void)
 	printf("\r\n");
 }
 
-/////////////// Ğ´1¸ö4BytedµÄÊı¾İ /////////////// 
+/////////////// å†™1ä¸ª4Bytedçš„æ•°æ® /////////////// 
 uint8_t DataFlash_byte_write(uint16_t addr,uint32_t sbyte)
 {
 	uint16_t i;
@@ -137,7 +137,7 @@ uint8_t DataFlash_byte_write(uint16_t addr,uint32_t sbyte)
 	return ok_flag;
 }
 
-/////////////// ¶Á1¸ö4BytedµÄÊı¾İ /////////////// 
+/////////////// è¯»1ä¸ª4Bytedçš„æ•°æ® /////////////// 
 uint32_t DataFlash_byte_read(uint16_t addr)
 {
 	uint32_t sbyte = 0;
@@ -155,11 +155,11 @@ uint32_t DataFlash_byte_read(uint16_t addr)
 	return sbyte;
 }
 
-/////////////// Ğ´N¸ö4BytedµÄÊı¾İ /////////////// 
+/////////////// å†™Nä¸ª4Bytedçš„æ•°æ® /////////////// 
 uint8_t DataFlash_str_write(uint16_t addr0, uint32_t *pbyte, uint16_t slen)
-//addr0: ÆğÊ¼µØÖ·
-//pbyte: 32Î»µÄÊı¾İ´®
-//slen:  Êı¾İ³¤¶È(slen¸ö4ByteµÄÊı¾İ)
+//addr0: èµ·å§‹åœ°å€
+//pbyte: 32ä½çš„æ•°æ®ä¸²
+//slen:  æ•°æ®é•¿åº¦(slenä¸ª4Byteçš„æ•°æ®)
 {
 	uint16_t i;
 	uint32_t  tmp_dat;
@@ -210,7 +210,7 @@ uint8_t DataFlash_str_write(uint16_t addr0, uint32_t *pbyte, uint16_t slen)
 	return ok_flag;
 }
 
-/////////////// ¶ÁN¸ö4BytedµÄÊı¾İ /////////////// 
+/////////////// è¯»Nä¸ª4Bytedçš„æ•°æ® /////////////// 
 void DataFlash_str_read(uint16_t addr0, uint32_t *pbyte, uint16_t slen)
 {
 	uint16_t i;
@@ -232,7 +232,7 @@ void DataFlash_str_read(uint16_t addr0, uint32_t *pbyte, uint16_t slen)
 	SYS_LockReg();
 }
 
-/////////////// DataFlash¶ÁĞ´²âÊÔ /////////////// 
+/////////////// DataFlashè¯»å†™æµ‹è¯• /////////////// 
 uint8_t DataFlash_test(void)
 {
 	uint16_t  tmp_addr = 0xC00;
